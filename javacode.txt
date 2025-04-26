@@ -1,0 +1,38 @@
+package com.ali.app1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+
+    int Counter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        TextView txtCount = findViewById(R.id.txtCounter);
+        Button btnCount = findViewById(R.id.btnCounter);
+        Button btnReset = findViewById(R.id.btnReset);
+
+        Counter=0;
+        btnCount.setOnClickListener(new View.setOnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Counter++;
+                txtCount.setText(""+Counter);
+            }
+        });
+        btnReset.setOnClickListener(new View.setOnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Counter=0;
+                txtCount.setText(""+Counter);
+            }
+        });
+
+    }
+}

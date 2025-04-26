@@ -1,0 +1,20 @@
+alter PROCEDURE [dbo].[sp_login]
+	
+	@Email nvarchar(100)=null,
+	@Password nvarchar(100)=null,
+	@AppType int=null,
+	@Result nvarchar(max) output
+AS
+BEGIN
+	
+
+	if not exists(select * from [dbo].[Login] where [UserName]=@Email and [Password]=@Password)
+	begin
+
+	 insert into [dbo].[Login] ([UserName],[Password]) values (@Email,@Password)
+	
+ 
+
+	end
+END
+GO

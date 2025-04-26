@@ -1,0 +1,27 @@
+USE [ProjectDemoDatabase]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_login]    Script Date: 6/28/2022 4:29:54 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_login]
+	
+	@UserEmail nvarchar(100)=null,
+	@Password nvarchar(100)=null,
+	@Result nvarchar(max) output
+AS
+BEGIN
+	
+
+	if not exists(select * from tbl_User where [UserEmail]=@UserEmail and [Password]=@Password)
+	begin
+
+	insert into [dbo].[Tbl_User]([UserEmail],[Password])
+	values(@UserEmail,@Password)
+	
+	set @Result = (
+	select * from tbl_User for json auto)
+
+	end
+END

@@ -1,0 +1,833 @@
+USE [master]
+GO
+/****** Object:  Database [MehranExpert_Db]    Script Date: 11/10/2021 2:20:04 AM ******/
+CREATE DATABASE [MehranExpert_Db]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'MehranExpert_Db', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\MehranExpert_Db.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'MehranExpert_Db_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\MehranExpert_Db_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [MehranExpert_Db] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [MehranExpert_Db].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [MehranExpert_Db] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [MehranExpert_Db] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [MehranExpert_Db] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [MehranExpert_Db] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [MehranExpert_Db] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [MehranExpert_Db] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [MehranExpert_Db] SET  MULTI_USER 
+GO
+ALTER DATABASE [MehranExpert_Db] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [MehranExpert_Db] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [MehranExpert_Db] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [MehranExpert_Db] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [MehranExpert_Db] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [MehranExpert_Db] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [MehranExpert_Db] SET QUERY_STORE = OFF
+GO
+USE [MehranExpert_Db]
+GO
+/****** Object:  Table [dbo].[tbl_GenrateCode]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_GenrateCode](
+	[Code_id] [int] IDENTITY(1,1) NOT NULL,
+	[EmailCode] [nvarchar](100) NULL,
+	[VerifyCode] [nvarchar](100) NULL,
+	[IsVerify] [bit] NULL,
+	[VerifyCount] [int] NULL,
+	[DateTime] [datetime] NULL,
+ CONSTRAINT [PK_tbl_GCode] PRIMARY KEY CLUSTERED 
+(
+	[Code_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_Lookup]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_Lookup](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[NameEn] [nvarchar](50) NULL,
+	[Description] [nvarchar](100) NULL,
+	[HeadID] [int] NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedAt] [datetime] NULL,
+	[Code] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tbl_Lookup] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_Module]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_Module](
+	[ModuleID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleName] [nvarchar](50) NULL,
+	[IsActive] [bit] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_Role]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_Role](
+	[RoleID] [int] IDENTITY(1,1) NOT NULL,
+	[RoleName] [nvarchar](100) NULL,
+	[IsActive] [bit] NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedAt] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_tbl_Role] PRIMARY KEY CLUSTERED 
+(
+	[RoleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_User]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_User](
+	[User_Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](50) NULL,
+	[Email] [nvarchar](100) NULL,
+	[FirstName] [nvarchar](100) NULL,
+	[LastName] [nvarchar](100) NULL,
+	[Password] [nvarchar](50) NULL,
+	[UserImage] [nvarchar](max) NULL,
+	[IsActive] [bit] NULL,
+	[IsDeleted] [bit] NULL,
+	[Phone] [nvarchar](50) NULL,
+	[DoB] [datetime] NULL,
+	[AppType] [int] NULL,
+	[Title] [nvarchar](100) NULL,
+	[Gender] [int] NULL,
+	[Address] [nvarchar](100) NULL,
+	[Information] [nvarchar](100) NULL,
+	[Country] [int] NULL,
+	[Zip] [nvarchar](100) NULL,
+	[City] [int] NULL,
+	[NumCode] [nvarchar](100) NULL,
+	[NationalIDCard] [nvarchar](50) NULL,
+ CONSTRAINT [PK_tbl_User] PRIMARY KEY CLUSTERED 
+(
+	[User_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_User_Role]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_User_Role](
+	[U_Role_ID] [int] IDENTITY(1,1) NOT NULL,
+	[R_Id] [int] NULL,
+	[U_id] [int] NULL,
+ CONSTRAINT [PK_tbl_User_Role] PRIMARY KEY CLUSTERED 
+(
+	[U_Role_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_VendorDetails]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_VendorDetails](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[YearsOfPaidExperience] [int] NULL,
+	[ReceiveYourTraining] [nvarchar](50) NULL,
+	[BasicTools] [bit] NULL,
+	[Powertools] [bit] NULL,
+	[Paintingsupplies] [bit] NULL,
+	[Lawncareequipment] [bit] NULL,
+	[Ladder] [bit] NULL,
+	[LegallyEligibleWorkPak] [bit] NULL,
+	[HowdidyouhearaboutMehranExpert] [nvarchar](50) NULL,
+	[PartOfCompanyLLC] [int] NULL,
+	[RefferalCode] [nvarchar](50) NULL
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[tbl_GenrateCode] ON 
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (1, N'q@1.com', N'123', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (2, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (3, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (4, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (5, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (6, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (7, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (8, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (9, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (10, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (11, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (12, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (13, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (14, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (15, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (16, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (17, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (18, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (19, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (20, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (21, N'q@q.com', N'System.Random', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (22, N'q@q.com', N'7547', 0, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (23, N'q@q.com', N'7841', 1, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (24, N'q@q.com', N'2045', 1, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (25, N'q@q.com', N'9880', 1, 0, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (26, N'q@q.com', N'5165', 1, 1, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (27, N'q@q.com', N'7545', 1, 1, NULL)
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (28, N'q@q.com', N'6764', 1, 1, CAST(N'2021-10-25T23:48:39.947' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (29, N'q@q.com', N'1242', 1, 1, CAST(N'2021-10-25T23:51:28.003' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (30, N'q@q.com', N'3723', 1, 1, CAST(N'2021-10-26T00:07:25.690' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (31, N'q@q.com', N'4698', 1, 3, CAST(N'2021-10-26T01:03:33.450' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (32, N'q@q.com', N'9804', 1, 2, CAST(N'2021-10-26T01:59:58.713' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (33, N'q@q.com', N'3710', 1, 2, CAST(N'2021-10-26T02:01:27.980' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (34, N'q@q.com', N'2064', 1, 1, CAST(N'2021-10-26T02:05:34.717' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (35, N'q@q.com', N'4305', 1, 2, CAST(N'2021-10-26T02:08:15.553' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (36, N'q@q.com', N'3079', 0, 0, CAST(N'2021-10-26T02:16:04.460' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (37, N'q@q.com', N'3728', 1, 2, CAST(N'2021-10-26T02:23:22.177' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (38, N'q@q.com', N'5569', 1, 2, CAST(N'2021-10-26T02:26:04.163' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (39, N'q@q.com', N'9426', 1, 3, CAST(N'2021-10-26T02:34:26.493' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (40, N'q@q.com', N'7202', 1, 16, CAST(N'2021-10-26T02:36:36.397' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (41, N'q@q.com', N'9362', 1, 3, CAST(N'2021-10-26T02:38:18.550' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (42, N'q@q.com', N'4713', 1, 5, CAST(N'2021-10-26T02:40:07.910' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (43, N'q@q.com', N'3821', 1, 2, CAST(N'2021-10-26T02:43:17.380' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (44, N'q@q.com', N'1770', 1, 2, CAST(N'2021-10-26T03:01:53.147' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (45, N'q@q.com', N'7925', 1, 2, CAST(N'2021-10-26T03:02:33.750' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (46, N'q@q.com', N'9269', 1, 22, CAST(N'2021-10-26T03:32:16.397' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (47, N'q@q.com', N'9900', 0, 0, CAST(N'2021-10-26T14:24:38.183' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (48, N'q@q.com', N'6010', 0, 0, CAST(N'2021-10-26T14:32:47.663' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (49, N'q@q.com', N'9900', 0, 0, CAST(N'2021-10-26T14:42:07.667' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (50, N'q@q.com', N'1621', 1, 1, CAST(N'2021-10-26T17:53:09.377' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (51, N'q@q.com', N'7149', 0, 0, CAST(N'2021-10-26T18:03:30.630' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (52, N'q@q.com', N'4106', 0, 0, CAST(N'2021-10-26T18:49:33.550' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (53, N'q@q.com', N'5504', 0, 0, CAST(N'2021-10-26T18:51:06.147' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (54, N'q@q.com', N'1547', 0, 0, CAST(N'2021-10-26T21:44:24.140' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (55, N'admin@admin.com', N'3629', 0, 0, CAST(N'2021-10-26T22:01:42.333' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (56, N'admin@admin.com', N'8745', 1, 1, CAST(N'2021-10-26T22:02:16.140' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (57, N'admin@admin.com', N'5876', 0, 0, CAST(N'2021-10-26T22:35:27.007' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (58, N'admin@admin.com', N'5037', 0, 0, CAST(N'2021-10-26T22:38:55.920' AS DateTime))
+GO
+INSERT [dbo].[tbl_GenrateCode] ([Code_id], [EmailCode], [VerifyCode], [IsVerify], [VerifyCount], [DateTime]) VALUES (59, N'admin@admin.com', N'1634', 0, 0, CAST(N'2021-10-26T22:40:20.803' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[tbl_GenrateCode] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_Lookup] ON 
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1, N'Country', NULL, NULL, 1, 1, NULL, N'Country')
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (2, N'Pakistan', N'Asian Country', 1, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (3, N'India', N'Asian Country', 1, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (4, N'City', NULL, NULL, 1, 1, NULL, N'City')
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (5, N'Islamabad', N'Pakistan Capital', 4, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (6, N'Karachi', N'Pakistan city', 4, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (7, N'Saudi Arabia', N'Middle East', 1, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (8, N'Gender', NULL, NULL, 1, 1, NULL, N'Gender')
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (9, N'Male', NULL, 8, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (10, N'Female', NULL, 8, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (11, N'Other', NULL, 8, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1002, N'YearsOfPaidExperience', NULL, NULL, 1, 1, NULL, N'YearsOfPaidExperience')
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1003, N'0-6 Months', N'Months', 1002, 1, 6, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1004, N'6 Months - 1 Year', N'Months - Year', 1002, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1005, N'1 Year - 3 Years', N'Years', 1002, 1, 3, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1006, N'3 Years - 5 Years', N'Years', 1002, 1, 5, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1007, N'5+ Years', N'Years', 1002, 1, 6, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1008, N'PartOfCompanyLLC', NULL, NULL, 1, 1, NULL, N'PartOfCompanyLLC')
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1009, N'No, I Work Individually', N'Work Individually', 1008, 1, 1, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1010, N'Yes, 1 - 5 employees ', N'Employees', 1008, 1, 5, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1011, N'Yes, 6- 10 employees ', N'Employees', 1008, 1, 10, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1012, N'Yes, 10+ employees ', N'Employees', 1008, 1, 11, NULL, NULL)
+GO
+INSERT [dbo].[tbl_Lookup] ([ID], [NameEn], [Description], [HeadID], [IsActive], [CreatedBy], [CreatedAt], [Code]) VALUES (1013, N'Mubashir', NULL, 1, 1, 1, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[tbl_Lookup] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_Role] ON 
+GO
+INSERT [dbo].[tbl_Role] ([RoleID], [RoleName], [IsActive], [CreatedBy], [CreatedAt], [IsDeleted]) VALUES (1, N'Admin', 1, NULL, NULL, 0)
+GO
+INSERT [dbo].[tbl_Role] ([RoleID], [RoleName], [IsActive], [CreatedBy], [CreatedAt], [IsDeleted]) VALUES (2, N'Manager', 1, NULL, NULL, 0)
+GO
+INSERT [dbo].[tbl_Role] ([RoleID], [RoleName], [IsActive], [CreatedBy], [CreatedAt], [IsDeleted]) VALUES (3, N'HR_Manager', 1, NULL, NULL, 0)
+GO
+INSERT [dbo].[tbl_Role] ([RoleID], [RoleName], [IsActive], [CreatedBy], [CreatedAt], [IsDeleted]) VALUES (4, N'Employee', 1, NULL, NULL, 0)
+GO
+INSERT [dbo].[tbl_Role] ([RoleID], [RoleName], [IsActive], [CreatedBy], [CreatedAt], [IsDeleted]) VALUES (6, N'sAMAD 420', 1, 1, CAST(N'2021-11-01T16:44:29.573' AS DateTime), 0)
+GO
+SET IDENTITY_INSERT [dbo].[tbl_Role] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_User] ON 
+GO
+INSERT [dbo].[tbl_User] ([User_Id], [UserName], [Email], [FirstName], [LastName], [Password], [UserImage], [IsActive], [IsDeleted], [Phone], [DoB], [AppType], [Title], [Gender], [Address], [Information], [Country], [Zip], [City], [NumCode], [NationalIDCard]) VALUES (1, N'admin', N'admin', N'Jameel', N'Bhai', N'T9rucaF7eoHL1VV/KUu/Wg==', NULL, 1, 0, N'1111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[tbl_User] OFF
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[proc_Forgetpass]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[proc_Forgetpass]
+	
+	@UserEmail nvarchar(100)=null,
+	@Result nvarchar(max) output
+AS
+BEGIN
+	
+
+	if exists(select Email from tbl_User where Email=@UserEmail and IsActive = 1)
+	begin
+
+	set @Result = (select Email from tbl_User where Email=@UserEmail for json auto)
+
+	end
+
+	
+	else
+	begin
+		set @Result = 'No Record Found'
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[proc_GenrateCode]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[proc_GenrateCode]
+	
+	@UserEmail nvarchar(100)=null,
+	@VerifyCode nvarchar(100)=null,
+	@Result nvarchar(max) output
+	
+AS
+BEGIN
+	
+
+	
+
+	insert into [dbo].[tbl_GenrateCode]([EmailCode],[VerifyCode],[IsVerify],[VerifyCount],[DateTime])
+	values(@UserEmail,@VerifyCode,0,0,GETDATE())
+
+	
+
+
+END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[proc_getDropDownByCode]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create PROCEDURE [dbo].[proc_getDropDownByCode]
+	
+	@code nvarchar(50) = null,
+	
+	@Result nvarchar(max) output
+
+AS
+BEGIN
+
+	declare @HeadID int
+
+	Select @HeadID = ID from [dbo].[tbl_Lookup] where [Code] = @code
+
+
+	set @Result = (Select * from [dbo].[tbl_Lookup] where HeadID = @HeadID for json Auto)
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[proc_InsertUpdateRole]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[proc_InsertUpdateRole]
+	
+	@RoleId int = null,
+	@RoleName nvarchar(100) = null,
+	@IsActive bit = null,
+	
+	@Result nvarchar(max) output
+
+AS
+BEGIN
+
+if (@RoleId = 0)
+begin
+
+
+	Insert into [dbo].[tbl_Role](RoleName,IsActive,[CreatedBy],[CreatedAt],[IsDeleted])
+	values(@RoleName,@IsActive,1,GETDATE(),0)
+
+	set @Result =( select * from [dbo].[tbl_Role] for json auto)
+	end
+	
+	
+	else
+	
+	begin
+
+	update [dbo].[tbl_Role] 
+	set [RoleName] = @RoleName,[IsActive] = @IsActive
+	where [RoleID] = @RoleId
+	set @Result =( select * from [dbo].[tbl_Role] for json auto)
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[proc_login]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[proc_login]
+	
+	@UserEmail nvarchar(100)=null,
+	@Password nvarchar(100)=null,
+	@AppType int=null,
+	@Result nvarchar(max) output
+AS
+BEGIN
+	
+
+	if exists(select * from tbl_User where Email=@UserEmail and [Password]=@Password and IsActive = 1 and IsDeleted = 0)
+	begin
+
+	set @Result = (
+	select * from tbl_User where Email=@UserEmail and [Password]=@Password for json auto
+	)
+
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[proc_Update_Password]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create PROCEDURE [dbo].[proc_Update_Password]
+	
+	@email nvarchar(50),
+	@new_password nvarchar(50),
+	@Result nvarchar(max) output
+	
+AS
+BEGIN
+	
+	
+	
+
+	update [dbo].[tbl_User]	
+
+	set [Password]=@new_password
+
+	where [Email] = @email
+
+	set @Result = ('Password update')
+	
+	
+	
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_check_Submitted_Code]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_check_Submitted_Code]
+	
+	@email nvarchar(50)=null,	
+	@code nvarchar (50)=null,
+	@Result nvarchar(max) output
+AS
+BEGIN
+	
+
+	
+	if exists(select * from [dbo].[tbl_GenrateCode] where [EmailCode]= @email and [VerifyCode]=@code and  [IsVerify] = 0 and [VerifyCount]<3)
+	begin
+
+	update [dbo].[tbl_GenrateCode]
+	set [IsVerify] = 1
+	where [EmailCode]= @email and [VerifyCode]=@code
+
+	set @Result = ('Code Verified')
+
+	end
+	else
+
+	begin
+
+	declare @verifyCount int
+
+	select  @verifyCount=[VerifyCount] from [dbo].[tbl_GenrateCode] where [EmailCode]= @email and [VerifyCode]=@code
+
+	update [dbo].[tbl_GenrateCode]
+	set [VerifyCount] = @verifyCount + 1
+	where [EmailCode]= @email and [VerifyCode]=@code
+
+
+	set @Result = ('Code Not Verified')
+
+	end
+	
+	
+	--select * from [dbo].[tbl_ForgetPasswordCodes]
+	
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ExteralUserRegistration]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_ExteralUserRegistration]
+	
+	@uid int = null,
+@title nvarchar(100) = null,
+@firstname nvarchar(100) = null,
+@lastname nvarchar(100) = null,
+@password nvarchar(100) = null,
+@phone nvarchar(50) = null,
+@email nvarchar(100) = null,
+@gender nvarchar(100) = null,
+@address nvarchar(100) = null,
+@information nvarchar(100) = null,
+@country nvarchar(100) = null,
+@zip nvarchar(100) = null,
+@city nvarchar(100) = null,
+@numcode nvarchar(100) = null,
+@Result nvarchar(max) output
+
+AS
+BEGIN
+	
+	if not exists(select * from tbl_User where Email = @email or phone = @phone)
+	begin
+
+	insert into [dbo].[tbl_User] ([Title],[FirstName] ,[LastName],[Password] ,[Phone] ,[Email] ,[Gender] , [Address],[Information] , [Country], [Zip],[City] ,[NumCode]  )
+	values(  @title, @firstname,@lastname,@password ,@phone ,@email , @gender ,@address ,@information , @country,@zip ,@city  ,@numcode)
+	
+	set @Result = (select * from tbl_User where Email = @email or phone = @phone for JSON auto)
+	end
+	
+	
+	else
+	
+	begin
+
+	set @Result = ('Account Already Exists')
+
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetData]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[sp_GetData]
+	
+	@uid int = null,
+	
+	@Result nvarchar(max) output
+
+AS
+BEGIN
+
+if (@uid = 0)
+begin
+set @Result =(
+	select * from [dbo].[tbl_User] for json auto
+)
+
+	end
+	
+	
+	else
+	
+	begin
+
+	set @Result =( select * from [dbo].[tbl_User] where [User_Id] = @uid for json auto)
+
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetRoleData]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_GetRoleData]
+	
+	@Rid int = null,
+	
+	@Result nvarchar(max) output
+
+	
+	
+
+AS
+BEGIN
+
+if (@Rid = 0)
+begin
+set @Result =(
+	select * from [dbo].[tbl_Role] for json auto
+)
+
+	end
+	
+	
+	else
+	
+	begin
+
+	set @Result =( select * from [dbo].[tbl_Role] where [RoleID] = @Rid for json auto)
+
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetUserData]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_GetUserData]
+	
+	@uid int = null,
+	
+	@Result nvarchar(max) output
+
+	
+	
+
+AS
+BEGIN
+
+if (@uid = 0)
+begin
+set @Result =(
+	select * from [dbo].[tbl_User] for json auto
+)
+
+	end
+	
+	
+	else
+	
+	begin
+
+	set @Result =( select * from [dbo].[tbl_User] where [User_Id] = @uid for json auto)
+
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Registration]    Script Date: 11/10/2021 2:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_Registration]
+	
+	@uid int = null,
+@username nvarchar(50) = null,
+@firstName nvarchar(50) = null,
+@lastname nvarchar(50) = null,
+@phone nvarchar(100) = null,
+@email nvarchar(50) = null,
+@password nvarchar(max) = null,
+@Result nvarchar(max) output
+
+AS
+BEGIN
+	
+	if not exists(select * from tbl_User where Email = @email or phone = @phone)
+	begin
+
+	insert into tbl_User([UserName],[Email],[FirstName],[LastName],[Password],[IsActive],[IsDeleted],[Phone])
+	values(@username,@email,@firstName,@lastname,@password,1,0,@phone)
+	
+	set @Result = (select * from tbl_User where Email = @email or phone = @phone for JSON auto)
+	end
+	
+	
+	else
+	
+	begin
+
+	set @Result = ('Account Already Exists')
+
+	end
+END
+GO
+USE [master]
+GO
+ALTER DATABASE [MehranExpert_Db] SET  READ_WRITE 
+GO

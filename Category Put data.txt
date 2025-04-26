@@ -1,0 +1,80 @@
+<script>
+    var CategoryData;
+    var EditCategoryData;
+    $(document).ready(function () {
+        $.ajax({
+            url: 'https://localhost:44396/api/Categoey/GetCategoryData',
+            type: 'Get',
+            headers: { 'Content-Type': 'application.js' },
+
+            success: function (res) {
+                console.log(res)
+                var response = JSON.parse(res);
+                CategoryData = response;
+
+                setValueInGrid();
+                console.log(response);
+
+            },
+
+            Error: function (err) {
+                console.log(err);
+            }
+
+        })
+    });
+
+    function setValueInGrid() {
+        $("#GetbodyData").empty()
+        var html = '';
+        for (var i = 0; i < CategoryData.length; i++) {
+            html += '<tr>'
+            html += '< td > ' + CategoryData[i].CategoryID + '</td > '
+            html += '< td > ' + CategoryData[i].CategoryName + '</td > '
+            html += '< td > ' + (CategoryData[i].IsActive == true ? 'Active' : 'Not - Active') + '</td > '
+            html += '< td > <button type="button" onclick="EditCategory(' + CategoryData[i].CategoryID + ')" class="btn btn-dark">Edit</button></td > '
+            html += '</tr > '
+        }
+        $("#GetbodyData").append(html);
+    }
+
+    function EditCategory(param) {
+        for (var i = 0; i < CategoryData.length; i++) {
+            if (CategoryData[i].CategoryID == param) {
+                EditCategoryData = CategoryData[i];
+                $('#txtCategoryName').val(EditCategoryData.CategoryName);
+                $('#exampleCheck1').prop('checked', EditCategoryData.IsActive);
+                $('#exampleModalCenter').modal('show');
+            }
+        }
+
+    }
+
+    function AddNew() {
+        $('#txtCategoryName').val('');
+        $('#exampleCheck1').prop('checked', false);
+        $('#exampleModalCenter').modal('show');
+        EditCategoryData.CategoryID = 0;
+    }
+
+    function InsertUpdateCategory() {
+
+
+        var CategoryName = $('#txtCategoryName').val();
+        var IsActive = $("#exampleCheck1").is(':checked');
+
+        $.ajax({
+            url: 'https://localhost:44396/api/Categoey/InsertUpdateCategory?CategoryID=' + EditCategoryData.CategoryID + '&CategoryName=' + CategoryName + '&IsActive=' + IsActive,
+            type: 'Get',
+            headers: { 'Content-Type': 'application.js' },
+
+            success: function (res) {
+                var response = JSON.parse(res.data);
+                CategoryData = response;
+                $('#exampleModalCenter').modal('hide');
+                setValueInGrid();
+                console.log(response);
+            }
+        })
+    }
+</script>

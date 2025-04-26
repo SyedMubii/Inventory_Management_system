@@ -1,0 +1,151 @@
+Controller
+
+
+using MehranExpertsApi.IServices;
+using MehranExpertsDataOperationLayer;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MehranExpertsApi.Controllers
+{
+    [Route("api/GetCategoryData")]
+    [ApiController]
+    public class CategoryManagementController : Controller
+    {
+        
+        Response response = new Response();
+
+
+        private readonly ICategoryManagementService Category_ManagementService;
+        public CategoryManagementController(ICategoryManagementService Service)
+        {
+            Category_ManagementService = Service;
+
+        }
+
+       
+        [Route("GetCategoryData")]
+        [HttpGet]
+        public IActionResult GetCategoryData()
+        {
+                Response res = new Response();
+                var gData = Category_ManagementService.GetCategoryData();
+            
+             return gData;
+            
+        }
+
+
+
+
+
+
+Services
+
+using MehranExpertsApi.IServices;
+using MehranExpertsDataOperationLayer;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MehranExpertsApi.Services
+{
+    public class CategoryManagementService : ICategoryManagementService
+    {
+        private ICommonServices commonService;
+
+        public CategoryManagementService(ICommonServices commonService)
+        {
+            this.commonService = commonService;
+        }
+        public dynamic GetCategoryData()
+        {
+            string outputrRsult = "@Result";
+            try
+            {
+                List<SqlParameter> spParameter = new List<SqlParameter>()
+                        {
+
+                          new SqlParameter() {ParameterName = "@Cid", SqlDbType = SqlDbType.Int, Value= 0},
+                          new SqlParameter() {
+                             ParameterName = "@Result",
+                             Direction = System.Data.ParameterDirection.Output,
+                             DbType = System.Data.DbType.String,
+                             Size= -1} };
+
+                dynamic data = commonService.GetSPData("sp_CategoryManagement", spParameter, outputrRsult);
+
+                return data.Tostring();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
+
+Js
+
+
+    $(document).ready(function () {
+        $.ajax({
+            url: 'https://localhost:44396/api/Category_Management/GetCategoryData',
+            type: 'Get',
+            headers: { 'Content-Type': 'application/js' },
+            data: jdata,
+            success: function (res) {
+                console.log(res)
+                var response = json.parse(res);
+                var Category = '';
+                for (i = 0; i < response.length; i++) {
+
+                    Category += '<tr>';
+                    Category += '<td>' + response[i].Category_ID + '</td >'
+                    Category += '<td>' + response[i].Category_Name + '</td >'
+                    Category += '<td>' + response[i].Is_Active + '</td >'
+                    Category += '<td>' + response[i].Is_Delete + '</td >'
+                    Category += '<td>' + response[i].Actions + '</td >'
+                    Category += '</tr>';
+                }
+
+                $('#GetCategoryData').append(Category);
+                console.log(response);
+
+
+            },
+            error: function (err) {
+                console.log(err);
+
+            }
+
+        })
+    });
+
+
+
+Iservice
+
+using MehranExpertsApi.Services;
+using MehranExpertsDataOperationLayer;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MehranExpertsApi.IServices
+{
+     public interface ICategoryManagementService
+     {
+        dynamic GetCategoryData();
+        dynamic GetData(GetCategoryData obj);
+
+    }
+}
