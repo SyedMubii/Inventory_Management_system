@@ -1,0 +1,38 @@
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\appsettings.json
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.exe
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.deps.json
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.runtimeconfig.json
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.runtimeconfig.dev.json
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.dll
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.pdb
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.Views.dll
+D:\All Data\repos\Inventory Management\Inventory Management Web\bin\Debug\netcoreapp3.1\Inventory Management Web.Views.pdb
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.csproj.AssemblyReference.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.GeneratedMSBuildEditorConfig.editorconfig
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.AssemblyInfoInputs.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.AssemblyInfo.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.csproj.CoreCompileInputs.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.MvcApplicationPartsAssemblyInfo.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.RazorAssemblyInfo.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.RazorAssemblyInfo.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\staticwebassets\Inventory Management Web.StaticWebAssets.Manifest.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\staticwebassets\Inventory Management Web.StaticWebAssets.xml
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\scopedcss\bundle\Inventory Management Web.styles.css
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.TagHelpers.input.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.TagHelpers.output.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.RazorCoreGenerate.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\Privacy.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.RazorTargetAssemblyInfo.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.RazorTargetAssemblyInfo.cs
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.Views.pdb
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.dll
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.pdb
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.genruntimeconfig.cache
+D:\All Data\repos\Inventory Management\Inventory Management Web\obj\Debug\netcoreapp3.1\Inventory Management Web.csproj.CopyComplete
